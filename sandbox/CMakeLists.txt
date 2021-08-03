@@ -14,7 +14,7 @@ set(LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
 #=====================================================
 
 set(SOURCES
-    
+    ${SRC_DIR}/main.c
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

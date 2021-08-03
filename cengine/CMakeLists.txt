@@ -31,11 +31,13 @@ find_package(OpenGL REQUIRED)
 #=====================================================
 
 set(SOURCES
-    
+   ${SRC_DIR}/util/log.c
+   ${SRC_DIR}/util/timer.c
 )
 
 set(HEADERS
-    
+    ${INC_DIR}/util/log.h
+    ${INC_DIR}/util/timer.h
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
@@ -52,9 +54,4 @@ target_include_directories(${PROJECT_NAME}
 
 target_compile_options(${PROJECT_NAME}
     PRIVATE -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Werror
-)
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                   ${PROJECT_SOURCE_DIR}/res ${CMAKE_CURRENT_BINARY_DIR}/res
 )
