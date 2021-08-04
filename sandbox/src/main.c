@@ -1,13 +1,23 @@
-#include "cengine/util/log.h"
+#include "cengine/core/memory.h"
+#include "cengine/graphics/window.h"
+
+#include <unistd.h>
 
 int
 main(void)
 {
-    ce_logi("Hi :)");
-    ce_loge("Uh oh...");
+    ce_WindowProps win_props = {
+        "Sandbox",
+        CE_WINDOWPOS_CENTERED, CE_WINDOWPOS_CENTERED, 640, 480,
+        CE_WINDOWPOS_CENTERED, CE_WINDOWPOS_CENTERED, 640, 480,
+        0
+    };
 
-    ce_logw("Warning");
+    ce_Window* window = ce_windowCreate(&win_props);
 
-    ce_logf("Dead");
-    ce_logi("Shouldn't reach here");
+    while (ce_windowIsOpen(window)) {
+        ce_windowSwapBuffers(window);
+    }
+
+    ce_windowDestroy(window);
 }

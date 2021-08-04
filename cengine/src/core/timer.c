@@ -1,9 +1,10 @@
-#include "cengine/util/timer.h"
+#include "cengine/core/timer.h"
+#include "cengine/core/base.h"
 
 #include <stdio.h>
 
 
-#if defined(_WIN32)
+#if CE_PLATFORM_WINDOWS
 
     typedef long time_t;
 
@@ -22,9 +23,9 @@
         return 0;
     }
 
-#else /* _WIN32 */
+#else /* CE_PLATFORM_WINDOWS */
     #include <time.h>
-#endif /* _WIN32 */
+#endif /* CE_PLATFORM_WINDOWS */
 
 
 double
@@ -68,7 +69,7 @@ ce_timeStamp(char* buf)
     time(&now);
     struct tm* tm = localtime(&now);
 
-    strftime(buf, 32, "%H:%M:%S", tm);
+    strftime(buf, 16, "%H:%M:%S", tm);
     int count = snprintf(buf, 32, "%s.%3ld", buf, milli);
     buf[count] = '\0';
 }

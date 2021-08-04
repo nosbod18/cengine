@@ -31,13 +31,24 @@ find_package(OpenGL REQUIRED)
 #=====================================================
 
 set(SOURCES
-   ${SRC_DIR}/util/log.c
-   ${SRC_DIR}/util/timer.c
+    ${SRC_DIR}/core/log.c
+    ${SRC_DIR}/core/memory.c
+    ${SRC_DIR}/core/timer.c
+
+    ${SRC_DIR}/data/vector.c
+
+    ${SRC_DIR}/graphics/window.c
 )
 
 set(HEADERS
-    ${INC_DIR}/util/log.h
-    ${INC_DIR}/util/timer.h
+    ${INC_DIR}/core/base.h
+    ${INC_DIR}/core/log.h
+    ${INC_DIR}/core/memory.h
+    ${INC_DIR}/core/timer.h
+
+    ${INC_DIR}/data/vector.h
+
+    ${INC_DIR}/graphics/window.h
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})

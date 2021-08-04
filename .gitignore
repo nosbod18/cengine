@@ -1,2 +1,6 @@
+# Directories
 build/
+.vscode/
+
+# Files
 .DS_Store

@@ -10,6 +10,7 @@ double          ce_timerStop(ce_Timer* timer);
 double          ce_timerSplit(ce_Timer* timer);
 double          ce_timerRead(const ce_Timer timer);
 
+/* buf should be at least 16 characters long */
 void            ce_timeStamp(char* buf);
 
 #endif /* _CE_UTIL_TIMER_H_ */
