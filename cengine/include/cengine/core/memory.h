@@ -1,19 +1,40 @@
-#ifndef _CE_CORE_MEMORY_H_
-#define _CE_CORE_MEMORY_H_
+/**
+ * @file memory.h
+ *
+ * @brief A basic wrapper around the memory managment functions which provides
+ *        helpful info such as memory leaks and error checking
+ *
+ * NOTE: define MEMORY_LOW_FOOTPRINT to make this module use less extra memory per
+ *       allocation
+ */
+
+#ifndef __CORE_MEMORY_H__
+#define __CORE_MEMORY_H__
 
 #include "cengine/core/base.h"
+#include <stdlib.h>
 
-void ce_memInit(void);
-void ce_memExit(void);
+#ifdef MEMORY_LOW_FOOTPRINT
+    #define MEM_DEBUG_PARAMS_DEF
+    #define MEM_DEBUG_PARAMS_IMPL
+#else
+    #define MEM_DEBUG_PARAMS_DEF  , const char* file, int line, const char* func
+    #define MEM_DEBUG_PARAMS_IMPL , FILENAME, __LINE__, __func__
+#endif
 
-#define ce_malloc(size_)            ce__malloc(size_ CE_DEBUG_PARAMS_IMP);
-#define ce_calloc(count_, size_)    ce__calloc(count_, size_ CE_DEBUG_PARAMS_IMP);
-#define ce_realloc(ptr_, size_)     ce__realloc(ptr_, size_ CE_DEBUG_PARAMS_IMP);
-#define ce_free(ptr_)               ce__free(ptr_ CE_DEBUG_PARAMS_IMP);
+void memory_init(void);
 
-void*   ce__malloc(size_t size CE_DEBUG_PARAMS_DEF);
-void*   ce__calloc(size_t count, size_t size CE_DEBUG_PARAMS_DEF);
-void*   ce__realloc(void* ptr, size_t size CE_DEBUG_PARAMS_DEF);
-void    ce__free(void* ptr CE_DEBUG_PARAMS_DEF);
+/* To avoid recursive expansions the actual memory functions */
+#ifndef MEMORY_RECURSION_GUARD
+    #define malloc(size_)           mem__alloc(size_ MEM_DEBUG_PARAMS_IMPL)
+    #define calloc(count_, size_)   mem__calloc(count_, size_ MEM_DEBUG_PARAMS_IMPL)
+    #define realloc(ptr_, size_)    mem__realloc(ptr_, size_ MEM_DEBUG_PARAMS_IMPL)
+    #define free(ptr_)              mem__free(ptr_ MEM_DEBUG_PARAMS_IMPL)
+#endif /* MEMORY_RECURSION_GUARD */
 
-#endif /* _CE_CORE_MEMORY_H_ */
+void*   mem__alloc(size_t size MEM_DEBUG_PARAMS_DEF);
+void*   mem__calloc(size_t count, size_t size MEM_DEBUG_PARAMS_DEF);
+void*   mem__realloc(void* ptr, size_t size MEM_DEBUG_PARAMS_DEF);
+void    mem__free(void* ptr MEM_DEBUG_PARAMS_DEF);
+
+#endif /* __CORE_MEMORY_H__ */

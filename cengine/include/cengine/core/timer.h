@@ -1,17 +1,17 @@
-#ifndef _CE_UTIL_TIMER_H_
-#define _CE_UTIL_TIMER_H_
+#ifndef __CORE_TIMER_H__
+#define __CORE_TIMER_H__
 
-typedef double ce_Timer;
+typedef double timer_t;
 
-double          ce_timeNow(void);
+double          time_now(void);
 
-ce_Timer        ce_timerStart(void);
-double          ce_timerStop(ce_Timer* timer);
-double          ce_timerSplit(ce_Timer* timer);
-double          ce_timerRead(const ce_Timer timer);
+timer_t         timer_start(void);
+double          timer_stop(timer_t* timer);
+double          timer_split(timer_t* timer);
+double          timer_read(const timer_t timer);
 
 /* buf should be at least 16 characters long */
-void            ce_timeStamp(char* buf);
+void            time_stamp(char* buf);
 
-#endif /* _CE_UTIL_TIMER_H_ */
+#endif /* __CORE_TIMER_H__ */
 

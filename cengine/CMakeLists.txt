@@ -31,6 +31,7 @@ find_package(OpenGL REQUIRED)
 #=====================================================
 
 set(SOURCES
+    ${SRC_DIR}/core/input.c
     ${SRC_DIR}/core/log.c
     ${SRC_DIR}/core/memory.c
     ${SRC_DIR}/core/timer.c
@@ -42,6 +43,7 @@ set(SOURCES
 
 set(HEADERS
     ${INC_DIR}/core/base.h
+    ${INC_DIR}/core/input.h
     ${INC_DIR}/core/log.h
     ${INC_DIR}/core/memory.h
     ${INC_DIR}/core/timer.h
@@ -64,5 +66,5 @@ target_include_directories(${PROJECT_NAME}
 )
 
 target_compile_options(${PROJECT_NAME}
-    PRIVATE -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Werror
+    PRIVATE -std=c99 -Wall -Wextra -Wpedantic -Werror
 )

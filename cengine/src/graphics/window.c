@@ -6,45 +6,45 @@
 
 #include <stdbool.h>
 
-ce_Window*
-ce_windowCreate(ce_WindowProps* props)
+window_t*
+window_create(window_props_t* props)
 {
     /* --- Init glfw ---------- */
-    ce_assert(glfwInit() == GLFW_TRUE, "Failed to initialize GLFW");
+    log_assert(glfwInit() == GLFW_TRUE, "Failed to initialize GLFW");
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* nativeWindow = glfwCreateWindow(props->w, props->h, props->title, NULL, NULL);
-    ce_assert(nativeWindow, "Failed to create native window");
+    GLFWwindow* native_window = glfwCreateWindow(props->w, props->h, props->title, NULL, NULL);
+    log_assert(native_window, "Failed to create native window");
 
     /* --- Init window ---------- */
-    ce_Window* window = ce_calloc(1, sizeof(*window));
-    ce_assert(window, "Failed to create window");
+    window_t* window = calloc(1, sizeof(*window));
+    log_assert(window, "Failed to create window");
 
-    window->window = nativeWindow;
+    window->window = native_window;
     window->props = *props;
 
-    if (window->props.x == CE_WINDOWPOS_CENTERED
-        && window->props.y == CE_WINDOWPOS_CENTERED)
+    if (window->props.x == WINDOWPOS_CENTERED
+        && window->props.y == WINDOWPOS_CENTERED)
         glfwGetWindowPos(window->window, &window->props.x, &window->props.y);
     else
         glfwSetWindowPos(window->window, window->props.x, window->props.y);
 
-    window->isMaximized = (props->flags >> CE_WINDOW_FULLSCREEN) & 1U;
-    window->isMinimized = 0;
-    window->isResizable = !((props->flags >> CE_WINDOW_NOT_RESIZABLE) & 1U);
-    window->isMovable   = !((props->flags >> CE_WINDOW_NOT_MOVABLE) & 1U);
-    window->isFocused   = 1;
-    window->isVsync     = (props->flags >> CE_WINDOW_VSYNC) & 1U;
+    window->is_maximized = (props->flags >> WINDOW_FULLSCREEN) & 1U;
+    window->is_minimized = 0;
+    window->is_resizable = !((props->flags >> WINDOW_NOT_RESIZABLE) & 1U);
+    window->is_movable   = !((props->flags >> WINDOW_NOT_MOVABLE) & 1U);
+    window->is_focused   = 1;
+    window->is_vsync     = (props->flags >> WINDOW_VSYNC) & 1U;
 
-    if (window->isVsync)
-        ce_windowSetVsync(window, 1);
+    if (window->is_vsync)
+        window_set_vsync(window, 1);
 
-    if (window->isMaximized)
-        ce_windowMaximize(window);
+    if (window->is_maximized)
+        window_maximize(window);
 
     glfwMakeContextCurrent(window->window);
 
@@ -52,18 +52,21 @@ ce_windowCreate(ce_WindowProps* props)
 }
 
 void
-ce_windowDestroy(ce_Window* window)
+window_destroy(window_t* window)
 {
+    if (!window)
+        return;
+
     glfwDestroyWindow(window->window);
 
-    ce_free(window);
+    free(window);
     window = NULL;
 
     glfwTerminate(); /** TODO: For now */
 }
 
 void
-ce_windowSwapBuffers(const ce_Window* window)
+window_flip(const window_t* window)
 {
     if (!window)
         return;
@@ -72,25 +75,25 @@ ce_windowSwapBuffers(const ce_Window* window)
 }
 
 void
-ce_windowSetVsync(ce_Window* window, bool vsync)
+window_set_vsync(window_t* window, bool vsync)
 {
     if (!window)
         return;
 
-    window->isVsync = vsync;
+    window->is_vsync = vsync;
 }
 
 bool
-ce_windowIsVsync(const ce_Window* window)
+window_is_vsync(const window_t* window)
 {
     if (!window)
         return 0;
 
-    return window->isVsync;
+    return window->is_vsync;
 }
 
 bool
-ce_windowIsOpen(const ce_Window* window)
+window_is_open(const window_t* window)
 {
     if (!window)
         return 0;
@@ -99,9 +102,9 @@ ce_windowIsOpen(const ce_Window* window)
 }
 
 void
-ce_windowMaximize(ce_Window* window)
+window_maximize(window_t* window)
 {
-    if (window->isMaximized)
+    if (window->is_maximized)
         return;
 
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
@@ -124,7 +127,7 @@ ce_windowMaximize(ce_Window* window)
 }
 
 void
-ce_windowMinimize(ce_Window* window)
+window_minimize(window_t* window)
 {
     if (!window)
         return;
@@ -135,16 +138,16 @@ ce_windowMinimize(ce_Window* window)
 }
 
 void
-ce_windowRestore(ce_Window* window)
+window_restore(window_t* window)
 {
     if (!window)
         return;
 
     glfwSetWindowMonitor(window->window,
                          NULL,
-                         window->props.originalX,
-                         window->props.originalY,
-                         window->props.originalW,
-                         window->props.originalH,
+                         window->props.x_original,
+                         window->props.y_original,
+                         window->props.w_original,
+                         window->props.h_original,
                          GLFW_DONT_CARE);
 }

@@ -3,8 +3,7 @@
 
 #include <stdio.h>
 
-
-#if CE_PLATFORM_WINDOWS
+#if PLATFORM_WINDOWS
 
     typedef long time_t;
 
@@ -23,29 +22,29 @@
         return 0;
     }
 
-#else /* CE_PLATFORM_WINDOWS */
+#else /* PLATFORM_WINDOWS */
     #include <time.h>
-#endif /* CE_PLATFORM_WINDOWS */
+#endif /* PLATFORM_WINDOWS */
 
 
 double
-ce_timeNow(void)
+time_now(void)
 {
     struct timespec ts = {0};
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return (double)ts.tv_sec + ((double)ts.tv_nsec * 1.0e9);
 }
 
-ce_Timer
-ce_timerStart(void)
+timer_t
+timer_start(void)
 {
-    return ce_timeNow();
+    return time_now();
 }
 
 double
-ce_timerSplit(ce_Timer* timer)
+timer_split(timer_t* timer)
 {
-    const double now = ce_timeNow();
+    const double now = time_now();
     const double elapsed = now - *timer;
 
     *timer = now;
@@ -53,13 +52,13 @@ ce_timerSplit(ce_Timer* timer)
 }
 
 double
-ce_timerRead(const ce_Timer timer)
+timer_read(const timer_t timer)
 {
-    return ce_timeNow() - timer;
+    return time_now() - timer;
 }
 
 void
-ce_timeStamp(char* buf)
+time_stamp(char* buf)
 {
     struct timespec ts = {0};
     clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -70,6 +69,6 @@ ce_timeStamp(char* buf)
     struct tm* tm = localtime(&now);
 
     strftime(buf, 16, "%H:%M:%S", tm);
-    int count = snprintf(buf, 32, "%s.%3ld", buf, milli);
+    int count = snprintf(buf, 16, "%s.%3ld", buf, milli);
     buf[count] = '\0';
 }

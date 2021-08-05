@@ -1,60 +1,73 @@
-#ifndef _CE_CORE_LOG_H_
-#define _CE_CORE_LOG_H_
+#ifndef __CORE_LOG_H__
+#define __CORE_LOG_H__
 
 #include "cengine/core/base.h"
 
-#if CE_COMPILER_MSVC
-    #define CE_BREAKPOINT __debugbreak()
+#if COMPILER_MSVC
+    #define DEBUG_BREAK __debugbreak()
 #else
     #include <signal.h>
-    #define CE_BREAKPOINT raise(SIGTRAP)
+    #define DEBUG_BREAK raise(SIGTRAP)
 #endif
 
 enum
 {
-    CE_LOG_LEVEL_trace  = 1U << 0,
-    CE_LOG_LEVEL_debug  = 1U << 1,
-    CE_LOG_LEVEL_info   = 1U << 2,
-    CE_LOG_LEVEL_warn   = 1U << 3,
-    CE_LOG_LEVEL_error  = 1U << 4,
-    CE_LOG_LEVEL_fatal  = 1U << 5,
-    CE_LOG_LEVEL_assert = 1U << 6,
+    LOG_LEVEL_TRACE  = BIT(0),
+    LOG_LEVEL_DEBUG  = BIT(1),
+    LOG_LEVEL_INFO   = BIT(2),
+    LOG_LEVEL_WARN   = BIT(3),
+    LOG_LEVEL_ERROR  = BIT(4),
+    LOG_LEVEL_FATAL  = BIT(5),
+    LOG_LEVEL_ASSERT = BIT(6),
 
-    CE_LOG_LEVEL_max = (1U << 8) - 1
+    LOG_LEVEL_MAX = BIT(8) - 1
 };
 
-#define ce_trace(...)\
-    ce__log(CE_LOG_LEVEL_trace, FILENAME, __LINE__, __func__, __VA_ARGS__)
+#define log_trace(...)\
+    log__log(LOG_LEVEL_TRACE, FILENAME, __LINE__, __func__, __VA_ARGS__)
 
-#define ce_debug(...)\
-    ce__log(CE_LOG_LEVEL_debug, FILENAME, __LINE__, __func__, __VA_ARGS__)
+#define log_debug(...)\
+    log__log(LOG_LEVEL_DEBUG, FILENAME, __LINE__, __func__, __VA_ARGS__)
 
-#define ce_info(...)\
-    ce__log(CE_LOG_LEVEL_info,  FILENAME, __LINE__, __func__, __VA_ARGS__)
+#define log_info(...)\
+    log__log(LOG_LEVEL_INFO,  FILENAME, __LINE__, __func__, __VA_ARGS__)
 
-#define ce_warn(...)\
-    ce__log(CE_LOG_LEVEL_warn,  FILENAME, __LINE__, __func__, __VA_ARGS__)
+#define log_warn(...)\
+    log__log(LOG_LEVEL_WARN,  FILENAME, __LINE__, __func__, __VA_ARGS__)
 
-#define ce_error(...)\
-    ce__log(CE_LOG_LEVEL_error, FILENAME, __LINE__, __func__, __VA_ARGS__)
+#define log_error(...)\
+    log__log(LOG_LEVEL_ERROR, FILENAME, __LINE__, __func__, __VA_ARGS__)
 
-#define ce_fatal(...)                                                           \
+#define log_fatal(...)                                                          \
     do {                                                                        \
-        ce__log(CE_LOG_LEVEL_fatal, FILENAME, __LINE__, __func__, __VA_ARGS__); \
-        CE_BREAKPOINT;                                                          \
+        log__log(LOG_LEVEL_FATAL, FILENAME, __LINE__, __func__, __VA_ARGS__);   \
+        DEBUG_BREAK;                                                            \
     } while (0)
 
-#define ce_assert(cond_, ...)\
+#define log_assert(x_, ...)\
     do {                                                                            \
-        if (!(cond_)) {                                                             \
-            ce__log(CE_LOG_LEVEL_assert, FILENAME, __LINE__, __func__, __VA_ARGS__);\
-            CE_BREAKPOINT;                                                          \
+        if (!(x_)) {                                                                \
+            log__log(LOG_LEVEL_ASSERT, FILENAME, __LINE__, __func__, __VA_ARGS__);  \
+            DEBUG_BREAK;                                                            \
         }                                                                           \
     } while (0)
 
-void ce_logEnable(unsigned char mask);
-void ce_logDisable(unsigned char mask);
+#define logt(...)     log_trace(__VA_ARGS__)
+#define logd(...)     log_debug(__VA_ARGS__)
+#define logi(...)     log_info(__VA_ARGS__)
+#define logw(...)     log_warn(__VA_ARGS__)
+#define loge(...)     log_error(__VA_ARGS__)
+#define logf(...)     log_fatal(__VA_ARGS__)
+#define loga(x_, ...) log_assert(x_, __VA_ARGS__)
 
-void ce__log(int level, const char* file, int line, const char* func, const char* fmt, ...);
+void log_enable(unsigned char mask);
+void log_disable(unsigned char mask);
 
-#endif /* _CE_CORE_LOG_H_ */
+void log__log(int level,
+              const char* file,
+              int line,
+              const char* func,
+              const char* fmt,
+              ...);
+
+#endif /* __CORE_LOG_H__ */
