@@ -37,6 +37,8 @@ set(SOURCES
     ${SRC_DIR}/core/timer.c
 
     ${SRC_DIR}/data/vector.c
+    ${SRC_DIR}/data/dstring.c
+    ${SRC_DIR}/data/list.c
 
     ${SRC_DIR}/graphics/window.c
 )
@@ -48,7 +50,9 @@ set(HEADERS
     ${INC_DIR}/core/memory.h
     ${INC_DIR}/core/timer.h
 
-    ${INC_DIR}/data/vector.h
+    ${INC_DIR}/data/vector.c
+    ${INC_DIR}/data/dstring.c
+    ${INC_DIR}/data/list.c
 
     ${INC_DIR}/graphics/window.h
 )
