@@ -1,7 +1,10 @@
-#include "cengine/graphics/window.h"
-#include "cengine/core/input.h"
-#include "cengine/core/memory.h"
-#include "cengine/core/log.h"
+#include "engine/graphics/window.h"
+#include "engine/core/input.h"
+#include "engine/core/memory.h"
+#include "engine/core/log.h"
+
+#include "nuklear/nuklear.h"
+
 
 int
 main(void)

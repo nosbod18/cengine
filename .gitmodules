@@ -1,3 +1,0 @@
-[submodule "cengine/lib/glfw"]
-	path = cengine/lib/glfw
-	url = https://github.com/glfw/glfw

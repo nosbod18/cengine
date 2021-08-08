@@ -20,21 +20,15 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME}
-    PUBLIC engine
-    PRIVATE
-)
+    PUBLIC engine)
 
 target_include_directories(${PROJECT_NAME}
-    PUBLIC ${INC_DIR} engine
-    PRIVATE
-)
+    PUBLIC ${INC_DIR} engine)
 
 target_compile_options(${PROJECT_NAME}
-    PUBLIC -Wall -Wextra -Wpedantic -Werror
-    PRIVATE
-)
+    PUBLIC -Wall -Wextra -Wpedantic -Werror)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                   ${PROJECT_SOURCE_DIR}/res ${CMAKE_CURRENT_BINARY_DIR}/res
-)
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/res ${CMAKE_CURRENT_BINARY_DIR}/res)

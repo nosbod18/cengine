@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(cengine)
+project(engine)
 
-add_subdirectory(cengine)
+add_subdirectory(engine)
 add_subdirectory(sandbox)
