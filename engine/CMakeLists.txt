@@ -39,17 +39,17 @@ find_package(OpenGL REQUIRED)
 set(HEADERS
     ${INC_DIR}/core/all.h
     ${INC_DIR}/core/base.h
+    ${INC_DIR}/core/cstring.h
     ${INC_DIR}/core/input.h
+    ${INC_DIR}/core/list.h
     ${INC_DIR}/core/log.h
     ${INC_DIR}/core/memory.h
+    ${INC_DIR}/core/stack.h
     ${INC_DIR}/core/timer.h
-
-    ${INC_DIR}/data/all.h
-    ${INC_DIR}/data/vector.h
-    ${INC_DIR}/data/dstring.h
-    ${INC_DIR}/data/list.h
+    ${INC_DIR}/core/vector.h
 
     ${INC_DIR}/graphics/all.h
+    ${INC_DIR}/graphics/layer.h
     ${INC_DIR}/graphics/renderer.h
     ${INC_DIR}/graphics/window.h
 
@@ -60,15 +60,15 @@ set(HEADERS
 )
 
 set(SOURCES
+    ${SRC_DIR}/core/cstring.c
     ${SRC_DIR}/core/input.c
+    ${SRC_DIR}/core/list.c
     ${SRC_DIR}/core/log.c
     ${SRC_DIR}/core/memory.c
     ${SRC_DIR}/core/timer.c
+    ${SRC_DIR}/core/vector.c
 
-    ${SRC_DIR}/data/vector.c
-    ${SRC_DIR}/data/dstring.c
-    ${SRC_DIR}/data/list.c
-
+    ${SRC_DIR}/graphics/layer.c
     ${SRC_DIR}/graphics/renderer.c
     ${SRC_DIR}/graphics/window.c
 

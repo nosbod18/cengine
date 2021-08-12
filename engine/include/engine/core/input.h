@@ -1,5 +1,5 @@
-#ifndef __CORE_INPUT_H__
-#define __CORE_INPUT_H__
+#ifndef CORE_INPUT_H
+#define CORE_INPUT_H
 
 #include "engine/graphics/window.h"
 
@@ -213,4 +213,4 @@ enum
     ACTION_REPEAT        = 3
 };
 
-#endif /* __CORE_INPUT_H__ */
+#endif /* CORE_INPUT_H */

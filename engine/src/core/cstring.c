@@ -1,7 +1,7 @@
-#include "engine/data/dstring.h"
-#include "engine/data/vector.h"
+#include "engine/core/cstring.h"
+#include "engine/core/vector.h"
 #include "engine/core/memory.h"
-#include "engine/core/base.h" /* UNUSED macro */
+#include "engine/core/base.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -93,9 +93,20 @@ string_replace(string_t str, const char* pattern, const char* with)
     return false;
 }
 
-char* string_tok(const string_t str, const char* delims)
+char** string_tok(const string_t str, const char* delims)
 {
-    return strtok(str, delims);
+    char** tokens = NULL;
+    char* token = strtok (str, delims);
+
+    vector_init(tokens);
+
+    while (token != NULL)
+    {
+        token = strtok(NULL, delims);
+        vector_push(tokens, token);
+    }
+
+    return tokens;
 }
 
 void
@@ -118,3 +129,9 @@ string_tolower(string_t str)
         str[i] += 32;
 }
 
+uint32_t
+string_hash(const string_t str)
+{
+    UNUSED(str);
+    return 0;
+}

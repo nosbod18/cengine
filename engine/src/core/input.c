@@ -22,7 +22,8 @@ input_create(const window_t* window)
 {
     input_t* input = calloc(1, sizeof(*input));
 
-    if (!input) {
+    if (!input)
+    {
         loge("Failed to create input");
         return NULL;
     }
@@ -153,12 +154,14 @@ input__refresh(input_t* input)
     if (!input)
         return;
 
-    for (int i = 0; i < KEY_LAST; ++i) {
+    for (int i = 0; i < KEY_LAST; ++i)
+    {
         input->keyboard.keys[i].pressed = 0;
         input->keyboard.keys[i].released = 0;
     }
 
-    for (int i = 0; i < MOUSE_BUTTON_LAST; ++i) {
+    for (int i = 0; i < MOUSE_BUTTON_LAST; ++i)
+    {
         input->mouse.buttons[i].pressed = 0;
         input->mouse.buttons[i].released = 0;
     }

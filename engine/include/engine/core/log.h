@@ -1,5 +1,5 @@
-#ifndef __CORE_LOG_H__
-#define __CORE_LOG_H__
+#ifndef CORE_LOG_H
+#define CORE_LOG_H
 
 #include "engine/core/base.h"
 
@@ -46,7 +46,8 @@ enum
 
 #define log_assert(x_, ...)\
     do {                                                                            \
-        if (!(x_)) {                                                                \
+        if (!(x_))                                                                  \
+        {                                                                           \
             log__log(LOG_LEVEL_ASSERT, FILENAME, __LINE__, __func__, __VA_ARGS__);  \
             DEBUG_BREAK;                                                            \
         }                                                                           \
@@ -70,4 +71,4 @@ void log__log(int level,
               const char* fmt,
               ...);
 
-#endif /* __CORE_LOG_H__ */
+#endif /* CORE_LOG_H */

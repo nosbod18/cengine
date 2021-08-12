@@ -1,5 +1,5 @@
-#ifndef __CORE_TIMER_H__
-#define __CORE_TIMER_H__
+#ifndef CORE_TIMER_H
+#define CORE_TIMER_H
 
 typedef double timer_t;
 
@@ -13,5 +13,5 @@ double          timer_read(const timer_t timer);
 /* buf should be at least 16 characters long */
 void            time_stamp(char* buf);
 
-#endif /* __CORE_TIMER_H__ */
+#endif /* CORE_TIMER_H */
 

@@ -1,5 +1,5 @@
-#ifndef __MATH_TYPES_H__
-#define __MATH_TYPES_H__
+#ifndef MATH_TYPES_H
+#define MATH_TYPES_H
 
 #include "engine/core/base.h"
 
@@ -19,7 +19,7 @@ typedef vec4_t  sphere_t;
 typedef vec4_t  plane_t;
 typedef plane_t frustum_t[6];
 
-typedef u8      color_t[4];
+typedef uint8_t color_t[4];
 
 
 #define ABS(x_)              ((x_) < 0 ? -(x_) : (x_))
@@ -41,4 +41,4 @@ typedef u8      color_t[4];
 #define EPSILON 1.0e-9;
 
 
-#endif /* __MATH_TYPES_H__ */
+#endif /* MATH_TYPES_H */

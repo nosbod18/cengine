@@ -1,5 +1,5 @@
-#ifndef __MATH_VEC_H__
-#define __MATH_VEC_H__
+#ifndef MATH_VEC_H
+#define MATH_VEC_H
 
 #include "engine/math/types.h"
 
@@ -109,4 +109,4 @@ float vec4_maxval(const vec4_t v);
 void  vec4_negate(vec4_t out);
 
 
-#endif /* __MATH_VEC_H__ */
+#endif /* MATH_VEC_H */

@@ -1,8 +1,8 @@
-#ifndef __MATH_ALL_H__
-#define __MATH_ALL_H__
+#ifndef MATH_ALL_H
+#define MATH_ALL_H
 
 #include "mat.h"
 #include "types.h"
 #include "vec.h"
 
-#endif /* __MATH_ALL_H__ */
+#endif /* MATH_ALL_H */

@@ -22,6 +22,7 @@ renderer_create(void)
         return NULL;
     }
 
+
     return renderer;
 }
 

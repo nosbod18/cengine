@@ -1,35 +1,25 @@
-#ifndef _CE_CORE_BASE_H_
-#define _CE_CORE_BASE_H_
+#ifndef CORE_BASE_H
+#define CORE_BASE_H
 
 #include <stdint.h>
-
-typedef int8_t   i8;
-typedef int16_t  i16;
-typedef int32_t  i32;
-typedef int64_t  i64;
-
-typedef uint8_t  u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef uint64_t u64;
+#include <stddef.h>
+#include <stdbool.h>
+#include <string.h> /* strrchr */
 
 
 #define UNUSED(x_) (void)(x_)
 
+#define BIT(x_) (1U << (x_))
+
+#define SWAP(T_, x_, y_) {T_ t_ = (x_), (x_) = (y_), (y_) = (t_)}
+
+#define FILENAME (strrchr("/" __FILE__, '/'))
 
 #define _STR(x_) #x_
 #define STR(x_) _STR(x_)
 
 #define _CAT(x_, y_) x_##y_
 #define CAT(x_, y_) _CAT(x_, y_)
-#define CAT3(x_, y_, z_) _CAT(_CAT(x_, y_), z_)
-
-#define BIT(x_) (1U << (x_))
-
-#define SWAP(T_, x_, y_) {T_ t_ = (x_), (x_) = (y_), (y_) = (t_)}
-
-
-#define FILENAME (&__FILE__[SOURCE_PATH_SIZE])
 
 
 /* Platform and compiler detection */

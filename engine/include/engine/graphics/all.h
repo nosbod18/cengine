@@ -1,8 +1,8 @@
-#ifndef __GRAPHICS_ALL_H__
-#define __GRAPHICS_ALL_H__
+#ifndef GRAPHICS_ALL_H
+#define GRAPHICS_ALL_H
 
 #include "layer.h"
 #include "renderer.h"
 #include "window.h"
 
-#endif /* __GRAPHICS_ALL_H__ */
+#endif /* GRAPHICS_ALL_H */

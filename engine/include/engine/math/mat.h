@@ -1,5 +1,5 @@
-#ifndef __MATH_MAT_H__
-#define __MATH_MAT_H__
+#ifndef MATH_MAT_H
+#define MATH_MAT_H
 
 #include "engine/math/types.h"
 
@@ -59,4 +59,4 @@ void mat4_lookat(mat4_t out, const vec3_t eye, const vec3_t center, const vec3_t
 void mat4_perspective(mat4_t out, float fov_deg, float aspect, float near, float far);
 void mat4_ortho(mat4_t out, float l, float r, float t, float b, float n, float f);
 
-#endif /* __MATH_MAT_H__ */
+#endif /* MATH_MAT_H */

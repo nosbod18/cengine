@@ -1,5 +1,5 @@
-#ifndef __GRAPHICS_WINDOW_H__
-#define __GRAPHICS_WINDOW_H__
+#ifndef GRAPHICS_WINDOW_H
+#define GRAPHICS_WINDOW_H
 
 #include <stdbool.h>
 
@@ -55,4 +55,4 @@ void        window_maximize(window_t* window);
 void        window_minimize(window_t* window);
 void        window_restore(window_t* window);
 
-#endif /* __GRAPHICS_WINDOW_H__ */
+#endif /* GRAPHICS_WINDOW_H */

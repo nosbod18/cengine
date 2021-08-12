@@ -1,9 +1,5 @@
 #include "engine/graphics/window.h"
-#include "engine/core/input.h"
-#include "engine/core/memory.h"
-#include "engine/core/log.h"
-
-#include "nuklear/nuklear.h"
+#include "engine/core/all.h"
 
 
 int

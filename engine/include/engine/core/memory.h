@@ -8,8 +8,8 @@
  *       allocation
  */
 
-#ifndef __CORE_MEMORY_H__
-#define __CORE_MEMORY_H__
+#ifndef CORE_MEMORY_H
+#define CORE_MEMORY_H
 
 #include "engine/core/base.h"
 
@@ -36,4 +36,4 @@ void*   mem__calloc(size_t count, size_t size MEM_DEBUG_PARAMS_DEF);
 void*   mem__realloc(void* ptr, size_t size MEM_DEBUG_PARAMS_DEF);
 void    mem__free(void* ptr MEM_DEBUG_PARAMS_DEF);
 
-#endif /* __CORE_MEMORY_H__ */
+#endif /* CORE_MEMORY_H */
